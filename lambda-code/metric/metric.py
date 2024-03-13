@@ -137,5 +137,5 @@ if __name__ == '__main__':
         },
         # Add more account configurations here if needed
     ]
-    metrics_data = get_subaccounts_and_metrics(account_configs)
+    metrics_data = subaccounts_and_metrics_alarm(account_configs)
     print(metrics_data)
