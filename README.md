@@ -35,6 +35,7 @@ cdk deploy
 ```
 cdk deploy
 ```
+
 # 代码
 ## lambda代码
 ```
@@ -44,6 +45,11 @@ lambda-code/
         ├── metric.py          业务逻辑主体：采集指标、告警
         ├── sns_main.py        sns主函数：判断如果有payer的告警主题，则发布消息
         └── sns_operations.py  sns创建主题，订阅主题，发布主题的函数
+```
+## 代码调试
+建议直接运行python
+```
+如运行metric.py 或者 index.py等
 ```
 ## CDK代码
 ```

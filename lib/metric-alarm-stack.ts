@@ -14,9 +14,9 @@ export class MetricAlarmStack extends cdk.Stack {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'), // Lambda 服务的身份标识
     });
 
-    // 为 Lambda 执行角色添加策略（示例）
+    // 为 Lambda 执行角色添加策略
     lambdaExecutionRole.addToPolicy(new iam.PolicyStatement({
-      actions: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents'],
+      actions: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents', 'sts:*', 'sns:*'],
       resources: ['*'], // 允许 Lambda 写入 CloudWatch Logs
     }));
 
@@ -35,10 +35,11 @@ export class MetricAlarmStack extends cdk.Stack {
     }));
 
     // 创建 Python Lambda 函数
-    const pythonLambda = new lambda.Function(this, 'MyPythonLambda', {
+    const pythonLambda = new lambda.Function(this, 'MetricLambda', {
       runtime: lambda.Runtime.PYTHON_3_8,
       handler: 'index.handler', // 指定 Lambda 处理程序的入口函数
       code: lambda.Code.fromAsset('./lambda-code/metric'), // 替换为您的 Python Lambda 代码路径
+      role: lambdaExecutionRole, // 关联 Lambda 执行角色
     });
 
     // 创建定时触发器，每天执行一次
