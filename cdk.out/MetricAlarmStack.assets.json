@@ -1,0 +1,32 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "f05816818ee5c2e8c89bb69191e5b292ceb3f4116d20f152697b22c5bb8155ab": {
+      "source": {
+        "path": "asset.f05816818ee5c2e8c89bb69191e5b292ceb3f4116d20f152697b22c5bb8155ab",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "f05816818ee5c2e8c89bb69191e5b292ceb3f4116d20f152697b22c5bb8155ab.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "6c1b742e6ed2cc1ff115ee68b8b6f2c8dd66162937373e21d4065f68cf9a1937": {
+      "source": {
+        "path": "MetricAlarmStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "6c1b742e6ed2cc1ff115ee68b8b6f2c8dd66162937373e21d4065f68cf9a1937.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
