@@ -91,7 +91,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "5addd6df33cdb437a9e48e2a08f56387edd42d6f5419cf2250163b90869b3543.zip"
+     "S3Key": "cab04f4c883c41a9d39b0cc0067bbd9cb9fa2bc315d2b10b413c0e031587cbe3.zip"
     },
     "Handler": "index.handler",
     "Role": {
@@ -107,7 +107,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "MetricAlarmStack/MyPythonLambda/Resource",
-    "aws:asset:path": "asset.5addd6df33cdb437a9e48e2a08f56387edd42d6f5419cf2250163b90869b3543",
+    "aws:asset:path": "asset.cab04f4c883c41a9d39b0cc0067bbd9cb9fa2bc315d2b10b413c0e031587cbe3",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }

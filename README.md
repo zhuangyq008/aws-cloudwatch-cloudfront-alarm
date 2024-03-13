@@ -30,3 +30,23 @@ cdk synth
 # 部署堆栈AWS CloudFormation到aws账户
 cdk deploy
 ```
+## 二次部署
+修改lambda代码或者cdk代码后
+```
+cdk deploy
+```
+# 代码
+## lambda代码
+```
+lambda-code/
+    └── metric                 采集&告警的lambda
+        ├── index.py           lambda主函数
+        ├── metric.py          业务逻辑主体：采集指标、告警
+        ├── sns_main.py        sns主函数：判断如果有payer的告警主题，则发布消息
+        └── sns_operations.py  sns创建主题，订阅主题，发布主题的函数
+```
+## CDK代码
+```
+lib
+└── metric-alarm-stack.ts   采集&告警
+```
