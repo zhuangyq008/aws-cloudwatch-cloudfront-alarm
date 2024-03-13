@@ -12,7 +12,7 @@ export class MetricAlarmStack extends cdk.Stack {
     const pythonLambda = new lambda.Function(this, 'MyPythonLambda', {
       runtime: lambda.Runtime.PYTHON_3_8,
       handler: 'index.handler', // 指定 Lambda 处理程序的入口函数
-      code: lambda.Code.fromAsset('./lambda-code'), // 替换为您的 Python Lambda 代码路径
+      code: lambda.Code.fromAsset('./lambda-code/metric'), // 替换为您的 Python Lambda 代码路径
     });
 
     // 创建定时触发器，每天执行一次
