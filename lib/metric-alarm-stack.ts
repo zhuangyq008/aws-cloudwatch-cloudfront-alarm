@@ -22,10 +22,10 @@ export class MetricAlarmStack extends cdk.Stack {
 
     // 为 Lambda 执行角色添加 sts:AssumeRole 权限，允许切换角色
     lambdaExecutionRole.addToPolicy(new iam.PolicyStatement({
-      actions: ['sts:AssumeRole'],
+      actions: ['sts:*'],
       resources: ['*'], // 允许扮演任何角色
     }));
-    
+
     // 为 Lambda 执行角色添加所有 SNS 权限
     lambdaExecutionRole.addToPolicy(new iam.PolicyStatement({
       actions: [
