@@ -62,6 +62,7 @@
                                 "logs:CreateLogGroup",
                                 "logs:CreateLogStream",
                                 "logs:PutLogEvents",
+                                "sns:*",
                                 "sts:AssumeRole"
                               ],
                               "Effect": "Allow",
@@ -192,7 +193,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "552ace8b243770d5cb3be2bc6261bdb69b3fed3ed9f97eb5e40d5269aa7ab00c.zip"
+                      "s3Key": "5addd6df33cdb437a9e48e2a08f56387edd42d6f5419cf2250163b90869b3543.zip"
                     },
                     "handler": "index.handler",
                     "role": {
@@ -225,7 +226,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Events::Rule",
                   "aws:cdk:cloudformation:props": {
-                    "scheduleExpression": "rate(1 hour)",
+                    "scheduleExpression": "rate(5 minutes)",
                     "state": "ENABLED",
                     "targets": [
                       {

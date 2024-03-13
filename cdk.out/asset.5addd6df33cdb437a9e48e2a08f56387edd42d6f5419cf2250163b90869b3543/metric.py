@@ -4,7 +4,7 @@ from sns_main import run_sns_operations
 
 # Get a list of all subaccounts and their associated metrics.
 
-def subaccounts_and_metrics_alarm(account_configs):
+def get_subaccounts_and_metrics(account_configs):
     """
     Get a list of all subaccounts and their associated metrics.
 

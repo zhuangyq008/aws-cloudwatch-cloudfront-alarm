@@ -30,6 +30,7 @@
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents",
+        "sns:*",
         "sts:AssumeRole"
        ],
        "Effect": "Allow",
@@ -90,7 +91,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "552ace8b243770d5cb3be2bc6261bdb69b3fed3ed9f97eb5e40d5269aa7ab00c.zip"
+     "S3Key": "5addd6df33cdb437a9e48e2a08f56387edd42d6f5419cf2250163b90869b3543.zip"
     },
     "Handler": "index.handler",
     "Role": {
@@ -106,7 +107,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "MetricAlarmStack/MyPythonLambda/Resource",
-    "aws:asset:path": "asset.552ace8b243770d5cb3be2bc6261bdb69b3fed3ed9f97eb5e40d5269aa7ab00c",
+    "aws:asset:path": "asset.5addd6df33cdb437a9e48e2a08f56387edd42d6f5419cf2250163b90869b3543",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -114,7 +115,7 @@
   "MyRuleA44AB831": {
    "Type": "AWS::Events::Rule",
    "Properties": {
-    "ScheduleExpression": "rate(1 hour)",
+    "ScheduleExpression": "rate(5 minutes)",
     "State": "ENABLED",
     "Targets": [
      {
