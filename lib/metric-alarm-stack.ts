@@ -25,6 +25,14 @@ export class MetricAlarmStack extends cdk.Stack {
       actions: ['sts:AssumeRole'],
       resources: ['*'], // 允许扮演任何角色
     }));
+    
+    // 为 Lambda 执行角色添加所有 SNS 权限
+    lambdaExecutionRole.addToPolicy(new iam.PolicyStatement({
+      actions: [
+        'sns:*'   // 允许执行 SNS 的所有操作
+      ],
+      resources: ['*'], // 这里资源可以根据你的实际需求进行限制
+    }));
 
     // 创建 Python Lambda 函数
     const pythonLambda = new lambda.Function(this, 'MyPythonLambda', {
@@ -39,7 +47,7 @@ export class MetricAlarmStack extends cdk.Stack {
     // });
     // 创建定时触发器，每5分钟执行一次
     const rule = new events.Rule(this, 'MyRule', {
-      schedule: events.Schedule.rate(cdk.Duration.minutes(60)), // 每5分钟执行一次
+      schedule: events.Schedule.rate(cdk.Duration.minutes(5)), // 每5分钟执行一次
     });
     rule.addTarget(new targets.LambdaFunction(pythonLambda));
   }

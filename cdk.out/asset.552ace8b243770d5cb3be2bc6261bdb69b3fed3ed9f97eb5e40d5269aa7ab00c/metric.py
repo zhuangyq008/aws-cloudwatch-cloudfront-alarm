@@ -1,6 +1,7 @@
 import datetime
 import boto3
-from sns_main import run_sns_operations
+import os
+from sns.sns_main import run_sns_operations
 
 # Get a list of all subaccounts and their associated metrics.
 
@@ -31,8 +32,8 @@ def get_subaccounts_and_metrics(account_configs):
         minutes = config['minutes']
         threshold = config['threshold']
         consecutive_points = config['consecutive_points']
-        topic_name = config['payer_topic_name']
-        # email_addresses = config['payer_email_addresses']
+        topic_name = config['topic_name']
+        email_addresses = config['email_addresses']
 
         # Create an STS client
         sts_client = boto3.client('sts')
@@ -66,8 +67,6 @@ def get_subaccounts_and_metrics(account_configs):
                 print(f"Metrics for cdn {distribution_id}")
                 metrics = cloudwatch.list_metrics(Namespace='AWS/CloudFront',
                                                   Dimensions=[{'Name': 'DistributionId', 'Value': distribution_id}])
-                
-                consecutive_high_points = 0
                 for metric in metrics['Metrics']:
                     if metric['MetricName'] == 'Requests':
                         # Subtract minutes from the current UTC time
@@ -86,6 +85,8 @@ def get_subaccounts_and_metrics(account_configs):
                             Dimensions=[{'Name': 'DistributionId', 'Value': distribution_id},
                                         {'Name': 'Region', 'Value': 'Global'}]
                         )
+                        print(f"Metrics for cdn {metric_statistics}")
+                        consecutive_high_points = 0
                         for point in metric_statistics['Datapoints']:
                             # If the values of consecutive_points consecutive data points in the loop are all greater than or equal to threshold,
                             # then send a message to SNS
@@ -94,9 +95,7 @@ def get_subaccounts_and_metrics(account_configs):
                             else:
                                 consecutive_high_points = 0
 
-                            print(f"consecutive_high_points： {consecutive_high_points}")
                             if consecutive_high_points >= consecutive_points:
-                                print(f"-----prepare send email-------")
                                 # Send SNS message here
 
                                 # 在linkedAccount上发送告警
@@ -107,9 +106,9 @@ def get_subaccounts_and_metrics(account_configs):
 
                                 # 在payer账号发送告警
                                 message = f"High request metrics for {distribution_id}"
-                                run_sns_operations(topic_name, message)
-                                break
-                                # TODO: 需要判断发送过后，多少分钟再次发
+                                run_sns_operations(topic_name, email_addresses, message)
+                                # TODO: 需要判断发送过后，多少分钟再次发送
+                        consecutive_high_points = 0
 
                         # Append metrics to the list
                         all_metrics.append({
@@ -130,10 +129,10 @@ if __name__ == '__main__':
             'assume_role_arn': 'arn:aws:iam::611234940057:role/OrganizationAccountAccessRole',
             'period': 300,
             'minutes': 180,
-            'threshold': 1,
-            'consecutive_points': 1,
-            'payer_topic_name' : 'metric-alarm-topic'
-            # ,'payer_email_addresses' : ['jarrywen@163.com', 'jarrywenjack@gmail.com']
+            'threshold': 10,
+            'consecutive_points': 3,
+            'topic_name' : 'metric-alarm-topic',
+            'email_addresses' : ['jarrywen@163.com', 'jarrywenjack@gmail.com']
         },
         # Add more account configurations here if needed
     ]

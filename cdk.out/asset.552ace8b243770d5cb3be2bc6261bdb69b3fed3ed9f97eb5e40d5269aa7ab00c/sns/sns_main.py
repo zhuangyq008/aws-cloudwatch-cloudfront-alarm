@@ -19,7 +19,6 @@ def run_sns_operations(topic_name=None, email_addresses=None, message=None):
     # 发布消息到主题
     if message:
         publish_message_to_topic(topic_arn, message)
-        print("Message published successfully.")
     else:
         print("No message provided.")
 

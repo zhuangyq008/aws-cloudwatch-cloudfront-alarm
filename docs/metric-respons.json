@@ -1,0 +1,132 @@
+{'Label': 'Requests', 'Datapoints': [
+        {'Timestamp': datetime.datetime(2024,
+            3,
+            13,
+            4,
+            59, tzinfo=tzutc()), 'Sum': 23.0, 'Unit': 'None'
+        },
+        {'Timestamp': datetime.datetime(2024,
+            3,
+            13,
+            5,
+            39, tzinfo=tzutc()), 'Sum': 10.0, 'Unit': 'None'
+        },
+        {'Timestamp': datetime.datetime(2024,
+            3,
+            13,
+            6,
+            29, tzinfo=tzutc()), 'Sum': 8.0, 'Unit': 'None'
+        },
+        {'Timestamp': datetime.datetime(2024,
+            3,
+            13,
+            5,
+            9, tzinfo=tzutc()), 'Sum': 1.0, 'Unit': 'None'
+        }
+    ], 'ResponseMetadata': {'RequestId': '4482edde-4459-447a-84ad-1c57e56542c8', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '4482edde-4459-447a-84ad-1c57e56542c8', 'content-type': 'text/xml', 'content-length': '878', 'date': 'Wed,
+            13 Mar 2024 07: 34: 12 GMT'
+        }, 'RetryAttempts': 0
+    }
+}
+Metrics for cdn E3HYE1HS6BQ9M7
+Metrics for cdn start_time: 2024-03-13 04: 34: 13.924293 end_time: 2024-03-13 07: 34: 13.924306
+Metrics for cdn {'Label': 'Requests', 'Datapoints': [
+        {'Timestamp': datetime.datetime(2024,
+            3,
+            13,
+            4,
+            59, tzinfo=tzutc()), 'Sum': 19.0, 'Unit': 'None'
+        }
+    ], 'ResponseMetadata': {'RequestId': '5e15d2f8-4942-4783-a89f-d48e0e08eb3e', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '5e15d2f8-4942-4783-a89f-d48e0e08eb3e', 'content-type': 'text/xml', 'content-length': '481', 'date': 'Wed,
+            13 Mar 2024 07: 34: 13 GMT'
+        }, 'RetryAttempts': 0
+    }
+}
+[
+    {'AccountId': '611234940057', 'DistributionId': 'E6GGB215I3F81', 'StartTime': datetime.datetime(2024,
+        3,
+        13,
+        4,
+        34,
+        12,
+        788846), 'EndTime': datetime.datetime(2024,
+        3,
+        13,
+        7,
+        34,
+        12,
+        788858), 'Metrics': {'Label': 'Requests', 'Datapoints': [], 'ResponseMetadata': {'RequestId': 'a4f332ee-eedf-494a-ba23-44cbbf9df084', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'a4f332ee-eedf-494a-ba23-44cbbf9df084', 'content-type': 'text/xml', 'content-length': '331', 'date': 'Wed,
+                    13 Mar 2024 07: 34: 12 GMT'
+                }, 'RetryAttempts': 0
+            }
+        }
+    },
+    {'AccountId': '611234940057', 'DistributionId': 'EASZU11KPIQCY', 'StartTime': datetime.datetime(2024,
+        3,
+        13,
+        4,
+        34,
+        13,
+        354973), 'EndTime': datetime.datetime(2024,
+        3,
+        13,
+        7,
+        34,
+        13,
+        354985), 'Metrics': {'Label': 'Requests', 'Datapoints': [
+                {'Timestamp': datetime.datetime(2024,
+                    3,
+                    13,
+                    4,
+                    59, tzinfo=tzutc()), 'Sum': 23.0, 'Unit': 'None'
+                },
+                {'Timestamp': datetime.datetime(2024,
+                    3,
+                    13,
+                    5,
+                    39, tzinfo=tzutc()), 'Sum': 10.0, 'Unit': 'None'
+                },
+                {'Timestamp': datetime.datetime(2024,
+                    3,
+                    13,
+                    6,
+                    29, tzinfo=tzutc()), 'Sum': 8.0, 'Unit': 'None'
+                },
+                {'Timestamp': datetime.datetime(2024,
+                    3,
+                    13,
+                    5,
+                    9, tzinfo=tzutc()), 'Sum': 1.0, 'Unit': 'None'
+                }
+            ], 'ResponseMetadata': {'RequestId': '4482edde-4459-447a-84ad-1c57e56542c8', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '4482edde-4459-447a-84ad-1c57e56542c8', 'content-type': 'text/xml', 'content-length': '878', 'date': 'Wed,
+                    13 Mar 2024 07: 34: 12 GMT'
+                }, 'RetryAttempts': 0
+            }
+        }
+    },
+    {'AccountId': '611234940057', 'DistributionId': 'E3HYE1HS6BQ9M7', 'StartTime': datetime.datetime(2024,
+        3,
+        13,
+        4,
+        34,
+        13,
+        924293), 'EndTime': datetime.datetime(2024,
+        3,
+        13,
+        7,
+        34,
+        13,
+        924306), 'Metrics': {'Label': 'Requests', 'Datapoints': [
+                {'Timestamp': datetime.datetime(2024,
+                    3,
+                    13,
+                    4,
+                    59, tzinfo=tzutc()), 'Sum': 19.0, 'Unit': 'None'
+                }
+            ], 'ResponseMetadata': {'RequestId': '5e15d2f8-4942-4783-a89f-d48e0e08eb3e', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '5e15d2f8-4942-4783-a89f-d48e0e08eb3e', 'content-type': 'text/xml', 'content-length': '481', 'date': 'Wed,
+                    13 Mar 2024 07: 34: 13 GMT'
+                }, 'RetryAttempts': 0
+            }
+        }
+    }
+]
