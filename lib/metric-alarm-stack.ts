@@ -16,10 +16,13 @@ export class MetricAlarmStack extends cdk.Stack {
     });
 
     // 创建定时触发器，每天执行一次
+    // const rule = new events.Rule(this, 'MyRule', {
+    //   schedule: events.Schedule.cron({ minute: '0', hour: '1' }), // 每天凌晨 1 点执行
+    // });
+    // rule.addTarget(new targets.LambdaFunction(pythonLambda));
+    // 创建定时触发器，每5分钟执行一次
     const rule = new events.Rule(this, 'MyRule', {
-      schedule: events.Schedule.cron({ minute: '0', hour: '1' }), // 每天凌晨 1 点执行
+      schedule: events.Schedule.rate(cdk.Duration.minutes(5)), // 每5分钟执行一次
     });
-    rule.addTarget(new targets.LambdaFunction(pythonLambda));
-  }
   }
 }
