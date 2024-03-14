@@ -1,19 +1,22 @@
 from ddb_manager import DynamoDBManager
 
-class DdbMetricAccountConfigItems(DynamoDBManager):
+class DdbAccountMetricConfigItems(DynamoDBManager):
     def __init__(self):
-        super().__init__('metric_account_config_items')
-
+        super().__init__('account-metric-config-items')
+    
+    def read_item_by_status(self):
+        response = self.query_items_by_attribute('status', 'enable')
+        return response
+    
 # 测试代码
 if __name__ == "__main__":
-    # 创建一个 MetricAccountConfigItems 实例
-    metric_table = DdbMetricAccountConfigItems()
+    # 创建一个 DdbAccountMetricConfigItems 实例
+    metric_table = DdbAccountMetricConfigItems()
 
-    # 测试数据
+    # 定义要插入的数据
     test_item = {
         'account_id': '611234940057',
         'role': 'OrganizationAccountAccessRole',
-        'assume_role_arn': '',
         'period': 300,
         'minutes': 30,
         'threshold': 10,
@@ -23,7 +26,6 @@ if __name__ == "__main__":
         'send_sns_flag': 'open',
         'save_metric_log_flag': 'open'
     }
-
     # 创建项目
     print("Creating item...")
     response = metric_table.create_item(test_item)
@@ -31,8 +33,13 @@ if __name__ == "__main__":
 
     # 读取项目
     print("\nReading item...")
-    key = {'account_id': '611234940057', 'role': 'OrganizationAccountAccessRole'}
+    key = {'account_id': '611234940057'}
     item = metric_table.read_item(key)
+    print("Read item:", item)
+
+    # 读取项目
+    print("\nReading item...")
+    item = metric_table.read_item_by_status()
     print("Read item:", item)
 
     # 更新项目
@@ -48,6 +55,6 @@ if __name__ == "__main__":
     print("Updated item:", item)
 
     # 删除项目
-    print("\nDeleting item...")
-    response = metric_table.delete_item(key)
-    print("Delete item response:", response)
+    # print("\nDeleting item...")
+    # response = metric_table.delete_item(key)
+    # print("Delete item response:", response)

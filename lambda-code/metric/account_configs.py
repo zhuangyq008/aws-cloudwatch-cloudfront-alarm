@@ -1,4 +1,5 @@
 # account_configs.py
+from ddb_account_metric_config_items import DdbAccountMetricConfigItems
 """
 
 Args:
@@ -21,7 +22,7 @@ account_configs = [
         'period': 300,
         'minutes': 30,
         'threshold': 10,
-        'consecutive_points': 3,
+        'consecutive_points': 1,
         'payer_topic_name': 'metric-alarm-topic',
         'status': 'enable',
         'send_sns_flag': 'open',
@@ -30,3 +31,11 @@ account_configs = [
     },
     # Add more account configurations here if needed
 ]
+
+
+metric_table = DdbAccountMetricConfigItems()
+
+# 读取项目
+print("\nReading account_configs...")
+account_configs = metric_table.read_item_by_status()
+print("Read account_configs:", account_configs)
