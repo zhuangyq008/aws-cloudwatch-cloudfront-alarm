@@ -39,19 +39,7 @@ def subaccounts_and_metrics_alarm(account_configs):
 
                 print(f"consecutive_high_points： {consecutive_high_points}")
                 if consecutive_high_points >= config['consecutive_points']:
-                    print(f"-----prepare send email-------")
-                    # Send SNS message here
-
-                    # 在linkedAccount上发送告警
-                    # sns = boto3.client('sns',
-                    #                     aws_access_key_id=aws_access_key_id,
-                    #                     aws_secret_access_key=aws_secret_access_key,
-                    #                     aws_session_token=aws_session_token)
-
-                    # 在payer账号发送告警
-                    message = f"High request metrics for {distribution['Id']}, consecutive_high_points： {consecutive_high_points}, threshold: {config['threshold']}, all_metrics: {all_metrics}"
-                    run_sns_operations(config['payer_topic_name'], message)
-                    break
+                    print("true")
                     # TODO: 需要判断发送过后，多少分钟再次发
 
 
