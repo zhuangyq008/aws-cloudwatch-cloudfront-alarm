@@ -13,10 +13,12 @@ def subaccounts_and_metrics_alarm(account_configs):
         assume_role_arn = f'arn:aws:iam::{config["account_id"]}:role/{config["role"]}'
         assumed_role_credentials = get_assumed_role_credentials(assume_role_arn)
 
+        print(f"AccountId {config['account_id']} {config['account_name']}")
         # List all CloudFront distributions
         distributions = list_deployed_distributions(assumed_role_credentials)
 
         for distribution in distributions:
+            print(f"DistributionId {distribution['Id']}")
             metric_statistics = get_metric_statistics(assumed_role_credentials, distribution, config['minutes'], config['period'], 'Sum')
             consecutive_high_points = 0
             all_metrics = []
@@ -31,13 +33,15 @@ def subaccounts_and_metrics_alarm(account_configs):
                         'DistributionId': distribution['Id'],
                         'StartTime': metric_statistics['StartTime'],
                         'EndTime': metric_statistics['EndTime'],
-                        'Datapoints': metric_statistics['Datapoints']
+                        'Datapoint': point
                     })
+                    sum_str = ','.join(str(metric['Datapoint']['Sum']) for metric in all_metrics)
+                    print(f"{sum_str}")
                 else:
                     consecutive_high_points = 0
                     all_metrics = []
 
-                print(f"consecutive_high_points： {consecutive_high_points}")
+                print(f"consecutive_high_points： {consecutive_high_points}, {point['Sum']}")
                 if consecutive_high_points >= config['consecutive_points']:
                     print(f"-----prepare send email-------")
                     # Send SNS message here
@@ -49,15 +53,17 @@ def subaccounts_and_metrics_alarm(account_configs):
                     #                     aws_session_token=aws_session_token)
 
                     # 在payer账号发送告警
-                    message = f"High request metrics for {distribution['Id']}, consecutive_high_points： {consecutive_high_points}, threshold: {config['threshold']}, all_metrics: {all_metrics}"
+                    message = (
+                        f"High request metrics for account: {config['account_id']}, "
+                        f"distribution id: {distribution['Id']}, "
+                        f"超出阈值的次数: {consecutive_high_points}, "
+                        f"请求次阈值: {config['threshold']}, "
+                        f"cdn请求次数列表: {sum_str}"
+                    )
                     run_sns_operations(config['payer_topic_name'], message)
                     break
-                    # TODO: 需要判断发送过后，多少分钟再次发
-
-
-    return all_metrics
+    return
 
 
 if __name__ == '__main__':
-    metrics_data = subaccounts_and_metrics_alarm(account_configs)
-    print(metrics_data)
+    subaccounts_and_metrics_alarm(account_configs)

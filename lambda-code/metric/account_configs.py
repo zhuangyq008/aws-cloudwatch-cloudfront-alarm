@@ -17,17 +17,18 @@ Returns:
 """
 account_configs = [
     {
-        'account_id': '611234940057',
+        'account_id': '1',
+        'account_name': 'm',
         'role': 'OrganizationAccountAccessRole',
         'period': 300,
         'minutes': 30,
-        'threshold': 10,
-        'consecutive_points': 1,
+        'threshold': 100,
+        'consecutive_points': 2,
         'payer_topic_name': 'metric-alarm-topic',
         'status': 'enable',
         'send_sns_flag': 'open',
         'save_metric_log_flag': 'open'
-        # ,'payer_email_addresses' : ['jarrywen@163.com', 'jarrywenjack@gmail.com']
+        # ,'payer_email_addresses' : ['1@163.com', '1@gmail.com']
     },
     # Add more account configurations here if needed
 ]
@@ -38,4 +39,4 @@ metric_table = DdbAccountMetricConfigItems()
 # 读取项目
 print("\nReading account_configs...")
 account_configs = metric_table.read_item_by_status()
-print("Read account_configs:", account_configs)
+# print("Read account_configs:", account_configs)
