@@ -3,7 +3,7 @@ from boto3.dynamodb.conditions import Attr, Key
 # from boto3.dynamodb.types import TypeDeserializer
 from decimal import Decimal
 
-class DynamoDBManager:
+class DdbDao:
     def __init__(self, table_name):
         self.table_name = table_name
         self.dynamodb = boto3.resource('dynamodb')

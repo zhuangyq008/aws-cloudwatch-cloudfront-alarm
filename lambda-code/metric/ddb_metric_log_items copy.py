@@ -2,7 +2,7 @@ from ddb_dao import DdbDao
 
 class DdbAccountMetricConfigItems(DdbDao):
     def __init__(self):
-        super().__init__('account-metric-config-items')
+        super().__init__('metric-log-items')
     
     def read_item_by_status(self):
         response = self.query_items_by_attribute('status', 'enable')
