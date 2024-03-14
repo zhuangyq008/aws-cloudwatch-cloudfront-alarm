@@ -25,8 +25,10 @@ account_configs = [
         'threshold': 100,
         'consecutive_points': 2,
         'payer_topic_name': 'metric-alarm-topic',
+        'linked_topic_name': 'metric-alarm-topic-1',
         'status': 'enable',
         'send_sns_flag': 'open',
+        "send_linked_sns_flag": "close",
         'save_metric_log_flag': 'open'
         # ,'payer_email_addresses' : ['1@163.com', '1@gmail.com']
     },

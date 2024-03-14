@@ -52,7 +52,6 @@ def subaccounts_and_metrics_alarm(account_configs):
                     #                     aws_secret_access_key=aws_secret_access_key,
                     #                     aws_session_token=aws_session_token)
 
-                    # 在payer账号发送告警
                     message = (
                         f"High request metrics for account: {config['account_id']}, "
                         f"distribution id: {distribution['Id']}, "
@@ -60,7 +59,11 @@ def subaccounts_and_metrics_alarm(account_configs):
                         f"请求次阈值: {config['threshold']}, "
                         f"cdn请求次数列表: {sum_str}"
                     )
-                    run_sns_operations(config['payer_topic_name'], message)
+                    # 在payer账号发送告警
+                    if config['send_sns_flag'] and config['send_sns_flag'] == 'open':
+                        run_sns_operations(config['payer_topic_name'], message)
+                    elif config['send_linked_sns_flag'] and config['send_linked_sns_flag'] == 'open':
+                        run_sns_operations(config['linked_topic_name'], message)
                     break
     return
 
