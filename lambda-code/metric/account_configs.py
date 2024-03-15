@@ -23,7 +23,7 @@ account_configs = [
         'period': 300,
         'minutes': 30,
         'threshold': 100,
-        'consecutive_points': 2,
+        'consecutive_points': 1,
         'payer_topic_name': 'metric-alarm-topic',
         'linked_topic_name': 'metric-alarm-topic-1',
         'status': 'enable',

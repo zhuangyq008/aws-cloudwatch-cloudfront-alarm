@@ -49,44 +49,28 @@ def subaccounts_and_metrics_alarm(account_configs):
                     print(f"-----prepare send email-------")
                     # Send SNS message here
 
-                    # 在linkedAccount上发送告警
-                    # sns = boto3.client('sns',
-                    #                     aws_access_key_id=aws_access_key_id,
-                    #                     aws_secret_access_key=aws_secret_access_key,
-                    #                     aws_session_token=aws_session_token)
-
-                    # message = (
-                    #     f"High request metrics for account: {config['account_id']}, "
-                    #     f"distribution id: {distribution['Id']}, "
-                    #     f"超出阈值的次数: {consecutive_high_points}, "
-                    #     f"请求次阈值: {config['threshold']}, "
-                    #     f"cdn请求次数列表: {sum_str}"
-                    # )
-
-                    # TODO:根据请求总数超出阈值的倍数来确定告警的等级
-
                     alarm = Alarm()
                     alarm.name = (
                         f"High request metrics for account: {config['account_id']}, "
                         f"distribution id: {distribution['Id']},"
                     )
                     alarm.description = "请查看cloudfront分发监控，确认您的流量是否存在异常"
-                    
+
+                    # 假设 point['Timestamp'] 是一个 datetime 对象
+                    point_timestamp = point['Timestamp']
+                    # 获取毫秒部分
+                    milliseconds = point_timestamp.microsecond // 1000
+                    # 格式化日期和时间，包含毫秒
+                    formatted_datetime = point_timestamp.strftime("%Y%m%d%H%M%S") + f"{milliseconds:03d}"
+                    alarm.alarm_id = config['account_id']+"-"+formatted_datetime
                     alarm.aws_account = config['account_id']
-                    alarm.timestamp = point['Timestamp'].strftime("%Y-%m-%d %H:%M:%S")
+                    alarm.timestamp = point_timestamp.strftime("%Y-%m-%d %H:%M:%S")
                     alarm.state_change = "OK -> ALARM"
-                    # 英文版
-                    # alarm.reason_for_state_change = (
-                    #     f"OK -> ALARM: "
-                    #     f"Total request count for consecutive 4 times in {config['period']/60} minute period: {sum_str}, all exceeding ",
-                    #     f"the set threshold: {config['threshold']}. "
-                    # )
                     alarm.reason_for_state_change =(
                         f"OK -> ALARM: "
                         f"连续{config['consecutive_points']}次在{config['period']/60}分钟时间段的总请求数列表为： {sum_str}，"
                         f"均超过设定的阈值: {config['threshold']}. "
                     )
-                    # TypeError: Object of type datetime is not JSON serializable
                     # alarm.datapoints = all_metrics
                     alarm.threshold = {
                         "metric_name": metric_statistics['MetricName'],
@@ -103,8 +87,7 @@ def subaccounts_and_metrics_alarm(account_configs):
                         "Action1": "Send ALARM",
                         "Action2": "Save ALARM Log" # optional 如禁用资源，可以使用executor-default
                     }
-                    sns_message = HelperUtils.format_json_string(alarm.__dict__, indent=4)
-                    # sns_message = HelperUtils.format_json_string(json.dumps(alarm.__dict__, indent=4, ensure_ascii=False))
+                    sns_message = HelperUtils.convert_json_text(alarm.__dict__)
                     print(f"{sns_message}")
                     if config['send_sns_flag'] and config['send_sns_flag'] == 'open':
                         # 在payer账号发送告警
