@@ -83,7 +83,7 @@ def subaccounts_and_metrics_alarm(account_configs):
                     # )
                     alarm.reason_for_state_change =(
                         f"OK -> ALARM: "
-                        f"连续4次在{config['period']/60}分钟时间段的总请求数列表为： {sum_str}，"
+                        f"连续{config['consecutive_points']}次在{config['period']/60}分钟时间段的总请求数列表为： {sum_str}，"
                         f"均超过设定的阈值: {config['threshold']}. "
                     )
                     # TypeError: Object of type datetime is not JSON serializable
