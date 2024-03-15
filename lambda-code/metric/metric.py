@@ -69,7 +69,7 @@ def subaccounts_and_metrics_alarm(account_configs):
                         f"High request metrics for account: {config['account_id']}, "
                         f"distribution id: {distribution['Id']},"
                     )
-                    alarm.description = "distribution id: {distribution['Id']，请求总数超出预期的告警。"
+                    alarm.description = "distribution id: {distribution['Id']，请查看cloudfront分发监控，确认您的流量是否存在异常"
                     
                     alarm.aws_account = config['account_id']
                     alarm.timestamp = point['Timestamp'].strftime("%Y-%m-%d %H:%M:%S")
