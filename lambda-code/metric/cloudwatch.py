@@ -35,7 +35,11 @@ def get_metric_statistics_custom(credentials, distribution, start_time, end_time
         return {
             'StartTime': start_time.strftime("%Y-%m-%d %H:%M:%S"),
             'EndTime': end_time.strftime("%Y-%m-%d %H:%M:%S"),
-            'Datapoints': metric_statistics.get('Datapoints')
+            'Datapoints': metric_statistics.get('Datapoints'),
+            'MetricName': 'Requests',
+            'Namespace': 'AWS/CloudFront',
+            'Statistics': Statistics,
+            'Period': period
         }
     else:
         return {
