@@ -2,9 +2,10 @@ from helper_utils import HelperUtils
 from ddb_metric_log_items import DdbMetricLogItems
 
 def save_log(sns_message):
-    print(f'sns_message: {sns_message}')
+    print(f'sns_message: {sns_message[:30]}')
     json_obj = HelperUtils.parse_formatted_text(sns_message)
-    print(json_obj)
+    print(f'prepare save log')
+    # print(json_obj)
     metric_log = DdbMetricLogItems()
     metric_log.create_item(json_obj)
     return json_obj
