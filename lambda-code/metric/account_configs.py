@@ -17,8 +17,8 @@ Returns:
 """
 account_configs = [
     {
-        'account_id': '1',
-        'account_name': 'm',
+        'account_id': '994693907619',
+        'account_name': 'm18396314820',
         'role': 'OrganizationAccountAccessRole',
         'period': 300,
         'minutes': 30,
@@ -40,5 +40,5 @@ metric_table = DdbAccountMetricConfigItems()
 
 # 读取项目
 print("\nReading account_configs...")
-account_configs = metric_table.read_item_by_status()
+# account_configs = metric_table.read_item_by_status()
 # print("Read account_configs:", account_configs)

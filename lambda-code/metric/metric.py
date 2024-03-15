@@ -4,6 +4,7 @@ from cloudfront import list_deployed_distributions
 from cloudwatch import get_metric_statistics
 from sns_main import run_sns_operations
 from alarm import Alarm
+from helper_utils import HelperUtils
 import json
 
 # Get a list of all subaccounts and their associated metrics.
@@ -69,7 +70,7 @@ def subaccounts_and_metrics_alarm(account_configs):
                         f"High request metrics for account: {config['account_id']}, "
                         f"distribution id: {distribution['Id']},"
                     )
-                    alarm.description = "distribution id: {distribution['Id']，请查看cloudfront分发监控，确认您的流量是否存在异常"
+                    alarm.description = "请查看cloudfront分发监控，确认您的流量是否存在异常"
                     
                     alarm.aws_account = config['account_id']
                     alarm.timestamp = point['Timestamp'].strftime("%Y-%m-%d %H:%M:%S")
@@ -99,15 +100,17 @@ def subaccounts_and_metrics_alarm(account_configs):
 
                     }
                     alarm.state_change_actions={
-                        "Action1": "ALARM",
-                        "Action2": "executor-default" # optional 如禁用资源，可以使用executor-default
+                        "Action1": "Send ALARM",
+                        "Action2": "Save ALARM Log" # optional 如禁用资源，可以使用executor-default
                     }
-                    print(f"{json.dumps(alarm.__dict__, indent=4, ensure_ascii=False)}")
+                    sns_message = HelperUtils.format_json_string(alarm.__dict__, indent=4)
+                    # sns_message = HelperUtils.format_json_string(json.dumps(alarm.__dict__, indent=4, ensure_ascii=False))
+                    print(f"{sns_message}")
                     if config['send_sns_flag'] and config['send_sns_flag'] == 'open':
                         # 在payer账号发送告警
-                        run_sns_operations(config['payer_topic_name'], json.dumps(alarm.__dict__, indent=4, ensure_ascii=False))
+                        run_sns_operations(config['payer_topic_name'], sns_message)
                     elif config['send_linked_sns_flag'] and config['send_linked_sns_flag'] == 'open':
-                        run_sns_operations(config['linked_topic_name'], json.dumps(alarm.__dict__, indent=4, ensure_ascii=False))
+                        run_sns_operations(config['linked_topic_name'], sns_message)
                     break
     return
 

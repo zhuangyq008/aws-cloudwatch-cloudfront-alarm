@@ -1,6 +1,6 @@
 class HelperUtils:
     @staticmethod
-    def format_json_string(json_obj, indent=0):
+    def format_json_string(json_obj, indent=4):
         formatted_str = ""
         for key, value in json_obj.items():
             if isinstance(value, dict):
@@ -26,16 +26,3 @@ class HelperUtils:
                 else:
                     current_dict[key] = value
         return json_obj
-
-# # 格式化后的字符串
-# formatted_string = """
-# - key1: value1
-# - key2:
-#     - nested_key: nested_value
-# """
-
-# # 将格式化后的字符串转换为 JSON 对象
-# json_obj = parse_formatted_string(formatted_string)
-
-# # 打印转换后的 JSON 对象
-# print(json_obj)
