@@ -5,7 +5,6 @@ from cloudwatch import get_metric_statistics
 from sns_main import run_sns_operations
 from alarm import Alarm
 from helper_utils import HelperUtils
-import json
 
 # Get a list of all subaccounts and their associated metrics.
 
