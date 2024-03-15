@@ -1,30 +1,36 @@
-# 介绍
+# introduce
 AWS CloudFront alarm that the total number of requests within a period of time exceeds the standard
-# 部署
-## 手动创建SNS，TOPIC跟配置数据一致
-## 部署CDK应用程序
+This project will create
+* Cloud Watch EventBridge
+*Two Lambda Function
+*Two DynamoDB Table
+
+Please run `cdk deploy --all` to deploy this stack in your AWS account.
+# deploy
+## Manually create SNS, TOPIC is consistent with the configuration data
+## Deploy CDK application
 ```
 cdk deploy --all
 ```
-## 设置Linked Account
-配置数据保存在DynamoDB
+## Set up Linked Account
+Configuration data is saved in DynamoDB
 
-# 代码
-## lambda代码
+# code
+## lambda code
 ```
 lambda-code/
-    └── metric                 采集&告警的lambda
-        ├── index.py           lambda主函数
-        ├── metric.py          业务逻辑主体：采集指标、告警
+     └── metric collection & alarm lambda
+         ├── index.py lambda main function
+         ├── metric.py business logic body: collecting indicators and alarms
 ```
-## 代码调试
-建议直接运行python
+## Code debugging
+It is recommended to run python directly
 ```
-修改入参，运行metric.py等
+Modify input parameters, run metric.py, etc.
 ```
-## CDK代码
+## CDK code
 ```
 lib
-└── metric-alarm-stack.ts   采集&告警
-└── metric-alarm-stack.ts   写入日志
+└── metric-alarm-stack.ts reads configuration, collects indicators, and alarms
+└── metric-alarm-stack.ts writes alarm log
 ```
