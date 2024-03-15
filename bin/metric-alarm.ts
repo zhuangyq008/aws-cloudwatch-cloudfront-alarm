@@ -2,6 +2,7 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { MetricAlarmStack } from '../lib/metric-alarm-stack';
+import { AlarmLogsStack } from '../lib/alarm-logs-stack';
 
 const app = new cdk.App();
 new MetricAlarmStack(app, 'MetricAlarmStack', {
@@ -18,4 +19,7 @@ new MetricAlarmStack(app, 'MetricAlarmStack', {
   // env: { account: '123456789012', region: 'us-east-1' },
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+});
+
+new AlarmLogsStack(app, 'AlarmLogsStack', {
 });
