@@ -53,7 +53,7 @@ def publish_message_to_topic(topic_arn, message):
         response = sns_client.publish(
             TopicArn=topic_arn,
             Subject='cdn request over limit',
-            Message=message
+            Message=message,
             # MessageAttributes={
             #     'email': {
             #         'DataType': 'String.Array',
