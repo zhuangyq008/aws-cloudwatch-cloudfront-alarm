@@ -14,6 +14,7 @@ export class AlarmLogsStack extends cdk.Stack {
       tableName: 'metric-log-items',
       partitionKey: {name: 'alarm_id', type: ddb.AttributeType.STRING},
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+      // timeToLiveAttribute: 'expire_time', // 定义 TTL 属性名称
       removalPolicy: cdk.RemovalPolicy.DESTROY
     })
 
