@@ -12,7 +12,7 @@ export class AlarmLogsStack extends cdk.Stack {
     //crate a dynamodb table
     const table = new ddb.Table(this, 'SimpleCrudApiTable', {
       tableName: 'metric-log-items',
-      partitionKey: {name: 'account_id', type: ddb.AttributeType.STRING},
+      partitionKey: {name: 'alarm_id', type: ddb.AttributeType.STRING},
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     })
