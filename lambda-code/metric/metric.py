@@ -54,28 +54,39 @@ def subaccounts_and_metrics_alarm(account_configs):
                     #                     aws_secret_access_key=aws_secret_access_key,
                     #                     aws_session_token=aws_session_token)
 
-                    message = (
-                        f"High request metrics for account: {config['account_id']}, "
-                        f"distribution id: {distribution['Id']}, "
-                        f"超出阈值的次数: {consecutive_high_points}, "
-                        f"请求次阈值: {config['threshold']}, "
-                        f"cdn请求次数列表: {sum_str}"
-                    )
-                    # 在payer账号发送告警
+                    # message = (
+                    #     f"High request metrics for account: {config['account_id']}, "
+                    #     f"distribution id: {distribution['Id']}, "
+                    #     f"超出阈值的次数: {consecutive_high_points}, "
+                    #     f"请求次阈值: {config['threshold']}, "
+                    #     f"cdn请求次数列表: {sum_str}"
+                    # )
+
+                    # TODO:根据请求总数超出阈值的倍数来确定告警的等级
+
                     alarm = Alarm()
                     alarm.name = (
                         f"High request metrics for account: {config['account_id']}, "
                         f"distribution id: {distribution['Id']},"
                     )
-                    alarm.description = (
+                    alarm.description = "distribution id: {distribution['Id']，请求总数超出预期的告警。"
+                    
+                    alarm.aws_account = config['account_id']
+                    alarm.timestamp = point['Timestamp'].strftime("%Y-%m-%d %H:%M:%S")
+                    alarm.state_change = "OK -> ALARM"
+                    # 英文版
+                    # alarm.reason_for_state_change = (
+                    #     f"OK -> ALARM: "
+                    #     f"Total request count for consecutive 4 times in {config['period']/60} minute period: {sum_str}, all exceeding ",
+                    #     f"the set threshold: {config['threshold']}. "
+                    # )
+                    alarm.reason_for_state_change =(
                         f"OK -> ALARM: "
-                        f"连续4次在{config['period']/60}分钟时间段的总请求数列表为： {sum_str}，均超过",
+                        f"连续4次在{config['period']/60}分钟时间段的总请求数列表为： {sum_str}，"
                         f"均超过设定的阈值: {config['threshold']}. "
                     )
-                    alarm.aws_account = config['account_id']
-                    alarm.timestamp = point['Timestamp']
-                    alarm.state_change = "OK -> ALARM"
-                    alarm.datapoints = all_metrics
+                    # TypeError: Object of type datetime is not JSON serializable
+                    # alarm.datapoints = all_metrics
                     alarm.threshold = {
                         "metric_name": metric_statistics['MetricName'],
                         "metric_namespace": metric_statistics['Namespace'],
@@ -91,12 +102,12 @@ def subaccounts_and_metrics_alarm(account_configs):
                         "Action1": "ALARM",
                         "Action2": "executor-default" # optional 如禁用资源，可以使用executor-default
                     }
-                    run_sns_operations(config['payer_topic_name'], json.dumps(alarm.__dict__, indent=4))
-                    # 在payer账号发送告警
+                    print(f"{json.dumps(alarm.__dict__, indent=4, ensure_ascii=False)}")
                     if config['send_sns_flag'] and config['send_sns_flag'] == 'open':
-                        run_sns_operations(config['payer_topic_name'], message)
+                        # 在payer账号发送告警
+                        run_sns_operations(config['payer_topic_name'], json.dumps(alarm.__dict__, indent=4, ensure_ascii=False))
                     elif config['send_linked_sns_flag'] and config['send_linked_sns_flag'] == 'open':
-                        run_sns_operations(config['linked_topic_name'], message)
+                        run_sns_operations(config['linked_topic_name'], json.dumps(alarm.__dict__, indent=4, ensure_ascii=False))
                     break
     return
 
