@@ -16,7 +16,7 @@ export class MetricAlarmStack extends cdk.Stack {
       tableName: 'account-metric-config-items',
       partitionKey: {name: 'account_id', type: ddb.AttributeType.STRING},
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
-      // removalPolicy: cdk.RemovalPolicy.DESTROY
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     })
 
     // 创建 Lambda 执行角色并附加策略
