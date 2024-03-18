@@ -1,4 +1,4 @@
-# Introduction
+# Introduction[[中文](README_cn.md)]
 
 AWS Partners serves some gaming customers who face an increasing number of cyber threats. In some cases, these threats have resulted in substantial bills, causing customers to flee due to their inability to pay. We have evaluated Partners' solutions to address these issues and attempted to use Prometheus+Grafana combined with the Cloudwatch exporter for monitoring. However, Partners have pointed out that this solution requires a significant amount of work when dealing with numerous Linked Accounts, such as configuring a separate Datasource and Dashboard in Grafana for each Linked Account, as well as configuring numerous alert parameters, resulting in a high learning curve. Therefore, our solution aims to address the following problems:
 
