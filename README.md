@@ -18,7 +18,7 @@ This project will create
 
 Note:
 - TOPIC Name of sns must be consistent with the following topic configuration data
-- Creating a subscription can be set up as a final step.
+- Creating a subscription can also be set in the final step. However, if the account status is available after data configuration, an SNS not found error will be reported when the program is run.
 
 ## 3.Set up The configuration data for Linked Account in the DynamoDB Table
 
@@ -48,6 +48,7 @@ Example Record:
 
 Note:
 - You can write a program to read all accounts under payer and write them automatically
+- You can write a program to automatically create sns based on configuration
 - payer_topic_name must be the same as the sns topic created in step 1
 - All LinkedAccount alerts will be sent to payer_topic_name
 - If send_linked_sns_flag is open, you need to create a LinkedAccount sns. The topic must be the same as linked_topic_name. This only sends alarms under this account.
