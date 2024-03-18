@@ -44,10 +44,9 @@ Example Record:
 ![config detail](docs/images/config_detail.png)
 注：
 - You can write a program to read all accounts under payer and write db them automatically
-- payer_topic_name must be the same as the sns topic created in step 1
-- All LinkedAccount alerts will be sent to payer_topic_name
-- If send_linked_sns_flag is open, you need to create a LinkedAccount sns. The topic must be the same as linked_topic_name. This only sends alarms under this account.
-
+- payer_topic_name必须跟步骤1中创建的sns topic一样
+- 所有LinkedAccount的告警都会发送到payer_topic_name
+- 如果send_linked_sns_flag为open，则需要创建一个LinkedAccount的sns，topic必须跟linked_topic_name一样，这个只发送这个账号下的告警
 # 代码
 ## lambda代码
 ```
