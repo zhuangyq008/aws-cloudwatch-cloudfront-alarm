@@ -3,12 +3,7 @@
 
 Please run `cdk deploy --all` to deploy this stack in your AWS account.
 # 部署
-## 1.手动创建SNS
-![SNS Infomation](docs/images/sns_detail.png)
-注：
-- TOPIC跟下面的配置数据要一致
-- 创建订阅可以在最后步骤设置。
-## 2.部署CDK应用程序
+## 1.部署CDK应用程序
 ```
 cdk deploy --all
 ```
@@ -16,7 +11,14 @@ cdk deploy --all
 * Cloud Watch EventBridge
 * Two Lambda Function
 * Two DynamoDB Table
-* 
+
+## 2.手动创建SNS
+![SNS Infomation](docs/images/sns_detail.png)
+注：
+- TOPIC跟下面的配置数据要一致
+- 创建订阅可以在最后步骤设置。
+- 后面可以增加自动创建sns，但是要约定topic name
+  
 ## 3.在DynamoDB设置LinkedAccout的配置数据
 
 table name: account-metric-config-items

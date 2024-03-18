@@ -3,23 +3,24 @@ AWS CloudFront alarm that the total number of requests within a period of time e
 
 Please run `cdk deploy --all` to deploy this stack in your AWS account.
 # deploy
-## Manually create SNS
-![SNS Infomation](docs/images/sns_detail.png)
-
-Note:
-- TOPIC Name of sns must be consistent with the following topic configuration data
-- Creating a subscription can be set up as a final step.
-## Deploy CDK application
+## 1.Deploy CDK application
 ```
 cdk deploy --all
 ```
 
 This project will create
 * Cloud Watch EventBridge
-*Two Lambda Function
-*Two DynamoDB Table
+* Two Lambda Function
+* Two DynamoDB Table
 
-## Set up The configuration data for Linked Account in the DynamoDB Table
+## 2.Manually create SNS
+![SNS Infomation](docs/images/sns_detail.png)
+
+Note:
+- TOPIC Name of sns must be consistent with the following topic configuration data
+- Creating a subscription can be set up as a final step.
+
+## 3.Set up The configuration data for Linked Account in the DynamoDB Table
 
 table name: account-metric-config-items
 
