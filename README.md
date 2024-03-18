@@ -18,7 +18,7 @@ This project will create
 
 Note:
 - TOPIC Name of sns must be consistent with the following topic configuration data
-- Creating a subscription can also be set in the final step. However, if the account status is available after data configuration, an SNS not found error will be reported when the program is run.
+- Creating a subscription can also be set in the final step.
 
 ## 3.Set up The configuration data for Linked Account in the DynamoDB Table
 

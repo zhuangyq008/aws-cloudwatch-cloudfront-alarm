@@ -16,8 +16,8 @@ cdk deploy --all
 ![SNS Infomation](docs/images/sns_detail.png)
 注：
 - TOPIC跟下面的配置数据要一致
-- 创建订阅也可以在最后步骤设置，但是如果数据配置后，账户的状态都是可用的，程序运行时会报sns找不到错误
-  
+- 创建订阅也可以在最后步骤再设置
+
 ## 3.在DynamoDB设置LinkedAccout的配置数据
 
 table name: account-metric-config-items
