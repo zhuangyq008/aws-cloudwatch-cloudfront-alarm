@@ -1,19 +1,46 @@
 # introduce
 AWS CloudFront alarm that the total number of requests within a period of time exceeds the standard
+
+Please run `cdk deploy --all` to deploy this stack in your AWS account.
+# deploy
+## Manually create SNS
+![SNS Infomation](docs/images/sns_detail.png)
+TOPIC must be consistent with the following configuration data
+## Deploy CDK application
+```
+cdk deploy --all
+```
+
 This project will create
 * Cloud Watch EventBridge
 *Two Lambda Function
 *Two DynamoDB Table
 
-Please run `cdk deploy --all` to deploy this stack in your AWS account.
-# deploy
-## Manually create SNS, TOPIC is consistent with the configuration data
-## Deploy CDK application
+## Set up The configuration data for Linked Account in the DynamoDB Table
+
+table name: account-metric-config-items
+
+
+Example Record: 
 ```
-cdk deploy --all
+{
+ "account_id": "11111",
+ "account_name": "testaccount",
+ "consecutive_points": 4,
+ "linked_topic_name": "metric-alarm-topic-zhangzhongyun",
+ "minutes": 30,
+ "payer_topic_name": "metric-alarm-topic",
+ "period": 300,
+ "role": "testrole",
+ "save_metric_log_flag": "open",
+ "send_linked_sns_flag": "close",
+ "send_sns_flag": "open",
+ "status": "enable",
+ "threshold": 2000
+}
 ```
-## Set up Linked Account
-Configuration data is saved in DynamoDB
+![config list](docs/images/config_list.png)
+![config detail](docs/images/config_detail.png)
 
 # code
 ## lambda code

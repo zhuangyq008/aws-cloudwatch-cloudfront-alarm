@@ -1,19 +1,46 @@
 # 介绍
 当CloudFront的Request指标超过设定的阈值的时候，发送告警信息
-本工程会创建
-* Cloud Watch EventBridge
-* Two Lambda Function
-* Two DynamoDB Table
 
 Please run `cdk deploy --all` to deploy this stack in your AWS account.
 # 部署
-## 手动创建SNS，TOPIC跟配置数据一致
+## 手动创建SNS
+![SNS Infomation](docs/images/sns_detail.png)
+TOPIC跟下面的配置数据要一致
 ## 部署CDK应用程序
 ```
 cdk deploy --all
 ```
-## 设置Linked Account
-配置数据保存在DynamoDB
+本工程会创建
+* Cloud Watch EventBridge
+* Two Lambda Function
+* Two DynamoDB Table
+* 
+## 在DynamoDB设置LinkedAccout的配置数据
+
+table name: account-metric-config-items
+
+
+Example Record: 
+```
+{
+ "account_id": "11111",
+ "account_name": "testaccount",
+ "consecutive_points": 4,
+ "linked_topic_name": "metric-alarm-topic-zhangzhongyun",
+ "minutes": 30,
+ "payer_topic_name": "metric-alarm-topic",
+ "period": 300,
+ "role": "testrole",
+ "save_metric_log_flag": "open",
+ "send_linked_sns_flag": "close",
+ "send_sns_flag": "open",
+ "status": "enable",
+ "threshold": 2000
+}
+```
+![config list](docs/images/config_list.png)
+![config detail](docs/images/config_detail.png)
+
 
 # 代码
 ## lambda代码
