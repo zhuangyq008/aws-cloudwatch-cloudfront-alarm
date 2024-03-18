@@ -3,10 +3,12 @@
 
 Please run `cdk deploy --all` to deploy this stack in your AWS account.
 # 部署
-## 手动创建SNS
+## 1.手动创建SNS
 ![SNS Infomation](docs/images/sns_detail.png)
-TOPIC跟下面的配置数据要一致
-## 部署CDK应用程序
+注：
+- TOPIC跟下面的配置数据要一致
+- 创建订阅可以在最后步骤设置。
+## 2.部署CDK应用程序
 ```
 cdk deploy --all
 ```
@@ -15,7 +17,7 @@ cdk deploy --all
 * Two Lambda Function
 * Two DynamoDB Table
 * 
-## 在DynamoDB设置LinkedAccout的配置数据
+## 3.在DynamoDB设置LinkedAccout的配置数据
 
 table name: account-metric-config-items
 
@@ -40,7 +42,8 @@ Example Record:
 ```
 ![config list](docs/images/config_list.png)
 ![config detail](docs/images/config_detail.png)
-
+注：
+- You can write a program to read all accounts under payer and write db them automatically
 
 # 代码
 ## lambda代码

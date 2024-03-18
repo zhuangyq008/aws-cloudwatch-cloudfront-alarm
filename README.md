@@ -5,7 +5,10 @@ Please run `cdk deploy --all` to deploy this stack in your AWS account.
 # deploy
 ## Manually create SNS
 ![SNS Infomation](docs/images/sns_detail.png)
-TOPIC must be consistent with the following configuration data
+
+Note:
+- TOPIC Name of sns must be consistent with the following topic configuration data
+- Creating a subscription can be set up as a final step.
 ## Deploy CDK application
 ```
 cdk deploy --all
@@ -42,6 +45,8 @@ Example Record:
 ![config list](docs/images/config_list.png)
 ![config detail](docs/images/config_detail.png)
 
+Note:
+- 
 # code
 ## lambda code
 ```
