@@ -46,7 +46,7 @@ Example Record:
 - You can write a program to read all accounts under payer and write db them automatically
 - payer_topic_name must be the same as the sns topic created in step 1
 - All LinkedAccount alerts will be sent to payer_topic_name
-- If send_linked_sns_flag is open, you need to create a LinkedAccount to sns. The topic must be the same as linked_topic_name. This only sends alarms under this account.
+- If send_linked_sns_flag is open, you need to create a LinkedAccount sns. The topic must be the same as linked_topic_name. This only sends alarms under this account.
 
 # 代码
 ## lambda代码
